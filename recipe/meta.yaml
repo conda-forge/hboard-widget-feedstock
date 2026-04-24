@@ -11,18 +11,18 @@ source:
 
 build:
   noarch: python
-  number: 0
+  number: 1
   script: "cd hboard-widget && {{ PYTHON }} -m pip install . -vv"
 
 requirements:
   host:
-    - python >=3.6,<3.10
+    - python {{ python_min }}
     - jupyterlab >=3.0
     - jupyter-packaging
     - pip
     - yarn
   run:
-    - python >=3.6,<3.10
+    - python >={{ python_min }},<3.10
     - hypernets >=0.2.5.1,<0.2.6
     - ipywidgets >=7.6.0
   run_constrained:
@@ -33,6 +33,7 @@ test:
     - hboard_widget.tests
   requires:
     - pip
+    - python {{ python_min }}
   commands:
     - pip check
 
